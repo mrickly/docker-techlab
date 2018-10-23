@@ -28,7 +28,7 @@ If you want to access your DB server there are two ways:
 1) Using `docker exec -it mariadb-container bash`
    This will connect you into the remote `bash` shell from where you can connect to the server via `mysql -uroot -pmy-secret-pw`.
 
-1) Using a local mysqlclient
+1) Using a local mysql client
    This is a bit tricky. First you have to find out the IP address of your docker container. Therefore use this command:
 
 ```bash
@@ -88,6 +88,12 @@ $ docker inspect mariadb-container
 
 In the last section (`NetworkSettings`) you will find the `IPAddress` for your container. In this example it's 172.17.0.2.
 Once you have the IP you can connect with the command `mysql -h172.17.0.2 -uroot -p` (use password from run command)
+
+The above command did not work on Windows/Powershell: `ERROR 2003 (HY000): Can't connect to MySQL server on '172.17.0.2' (10060)`
+Alternative on Windows/Powershell: Start the container with a port mapping:
+`docker run --name mariadb-container -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mariadb`
+Connect with:
+`.\mysql --host=localhost --port=3306 -uroot -pmy-secret-pw`
 
 **Note:** The mysql client must be installed on your computer. On Windows, you can use the binary from the ZIP archive at <https://dev.mysql.com/downloads/mysql/>.
 
