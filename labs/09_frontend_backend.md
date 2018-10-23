@@ -38,7 +38,7 @@ NETWORK ID          NAME                DRIVER              SCOPE
 For this exercise we are creating our own network with `docker network create docker-techlab`.
 If you now rerun the list command for Docker networks you should see the newly created network.
 
-To make the backend accessable/visible to the fronend (via Container-NAMES) you have to run both containers with the `--network` option:
+To make the backend accessible/visible to the frontend (via Container-NAMES) you have to run both containers with the `--network` option:
 
 ```bash
 $ docker run -itd --network docker-techlab --name apache-php -v php-app:/var/www/html -p80:80 php:7-apache
